@@ -1,0 +1,136 @@
+<script>
+import {ref} from 'vue';
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    const thumbsSwiper = ref(null);
+
+    const setThumbsSwiper = (swiper) => {
+      thumbsSwiper.value = swiper;
+    };
+
+    return {
+      thumbsSwiper,
+      setThumbsSwiper,
+      modules: [FreeMode, Navigation, Thumbs],
+    };
+  },
+};
+</script>
+
+<template>
+  <swiper
+      :style="{
+      '--swiper-navigation-color': '#fff',
+      '--swiper-pagination-color': '#fff',
+    }"
+      :spaceBetween="10"
+      :navigation="true"
+      :thumbs="{ swiper: thumbsSwiper.value }"
+      :modules="modules"
+      class="mySwiper2"
+  >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-1.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-2.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-3.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-4.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-5.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-6.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-7.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-8.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-9.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img src="https://swiperjs.com/demos/images/nature-10.jpg"
+    /></swiper-slide>
+  </swiper>
+  <swiper
+      @swiper="setThumbsSwiper"
+      :spaceBetween="10"
+      :slidesPerView="4"
+      :freeMode="true"
+      :watchSlidesProgress="true"
+      :modules="modules"
+      class="mySwiper"
+  >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-1.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-2.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-3.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-4.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-5.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-6.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-7.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-8.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img
+        src="https://swiperjs.com/demos/images/nature-9.jpg"/></swiper-slide
+    >
+    <swiper-slide
+    ><img src="https://swiperjs.com/demos/images/nature-10.jpg"
+    /></swiper-slide>
+  </swiper>
+</template>
+
+<style scoped lang="scss">
+
+</style>
