@@ -27,7 +27,7 @@ export default {
         <div class="trustcrypt-text">
           Защитите ваш бизнес от всех видов киберугроз с помощью решений мирового класса.
         </div>
-        <button class="trustcrypt-button__green" type="button">Посмотреть продукты</button>
+        <router-link to="products" class="trustcrypt-button__green">Посмотреть продукты</router-link>
       </div>
       <img src="/src/assets/img/home.png" alt="img"/>
     </div>
@@ -220,8 +220,11 @@ export default {
         }
       }
 
-      button {
+      a {
         width: 236px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
 

@@ -9,7 +9,7 @@ const store = productsStore()
 
 const router = useRouter()
 const goToProductId = (id) => {
-  router.push(({name: "ProductView", params: {id}}))
+  router.push(({name: "ProductPage", params: {id}}))
 }
 
 onMounted(async () => {
@@ -58,7 +58,9 @@ onMounted(async () => {
       <div class="main-wrapper__item"
            v-for="item in store.items" :key="item.id"
            @click="goToProductId(item.id)">
-        <img :src="item.img" alt="img"/>
+        <div class="main-wrapper__item-image">
+          <img :src="item.img" alt="img"/>
+        </div>
         <h4>{{ item.name }}</h4>
         <p>
           {{ item.description }}
@@ -75,10 +77,10 @@ onMounted(async () => {
     font-size: 34px;
     font-weight: 700;
     padding-bottom: 32px;
-    @media(max-width: 1220px){
+    @media(max-width: 1220px) {
       font-size: 26px;
     }
-    @media(max-width: 991px){
+    @media(max-width: 991px) {
       font-size: 21px;
       padding-bottom: 16px;
     }
@@ -89,7 +91,7 @@ onMounted(async () => {
     padding-bottom: 32px;
     color: #D4D4D4;
     font-size: 17px;
-    @media(max-width: 991px){
+    @media(max-width: 991px) {
       padding-bottom: 16px;
       width: 100%;
     }
@@ -99,7 +101,7 @@ onMounted(async () => {
     display: flex;
     gap: 24px;
     margin-bottom: 32px;
-    @media(max-width: 991px){
+    @media(max-width: 991px) {
       gap: 16px;
     }
 
@@ -111,12 +113,19 @@ onMounted(async () => {
       height: 48px;
       color: #D4D4D4;
       font-size: 17px;
-      @media(max-width: 991px){
+      transition: 0.5s;
+
+      &:hover {
+        box-shadow: 0 0 9px white;
+      }
+
+      @media(max-width: 991px) {
         font-size: 14px;
         width: 100px;
         padding: 12px 0;
         height: auto;
       }
+
       &._active {
         border: 1px solid #ECF1F0;
         background: #ECF1F0;
@@ -129,10 +138,10 @@ onMounted(async () => {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 32px;
-    @media(max-width: 1220px){
+    @media(max-width: 1220px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    @media(max-width: 767px){
+    @media(max-width: 767px) {
       grid-template-columns: 1fr;
     }
 
@@ -151,11 +160,50 @@ onMounted(async () => {
         box-shadow: 0 0 9px white;
       }
 
-      img {
-        display: block;
-        width: 100%;
-        height: 215px;
-        object-fit: cover;
+      &-image {
+        position: relative;
+
+        img {
+          display: block;
+          width: 100%;
+          height: 215px;
+          object-fit: cover;
+          border-radius: 16px 16px 0px 0px;
+        }
+      }
+
+      &-categories {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        padding: 12px;
+        border-radius: 60px;
+        background: #0FAE96;
+        color: #ECF1F0;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      &-publication {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          color: #ECF1F0;
+          font-size: 12px;
+          font-weight: 600;
+          border-radius: 1000px;
+          border: 0.5px solid rgba(255, 255, 255, 0.10);
+          background: #000000b5;
+          padding: 7px 12px;
+        }
       }
 
       h4 {
@@ -164,7 +212,7 @@ onMounted(async () => {
         font-weight: 700;
         padding: 16px 0;
         height: 91px;
-        @media(max-width: 991px){
+        @media(max-width: 991px) {
           font-size: 21px;
           height: auto;
         }

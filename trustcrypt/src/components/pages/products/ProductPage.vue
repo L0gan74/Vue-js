@@ -2,14 +2,14 @@
 import {productsStore} from "../../../stores/store.ts";
 import {useRoute} from "vue-router";
 import {computed} from "vue";
-import {ProductItem} from "../../../interface/Product";
+import  {AllProductItem} from "../../../interface/Product";
 import SwiperProduct from "./SwiperProduct.vue";
 
 
 const store = productsStore()
 const route = useRoute()
 
-const selectedProduct = computed<ProductItem | undefined>(() => {
+const selectedProduct = computed<AllProductItem>(() => {
   return store.items.find((item) => item.id === Number(route.params.id))
 })
 
@@ -18,6 +18,10 @@ const selectedProduct = computed<ProductItem | undefined>(() => {
 
 <template>
   <main class="main">
+    <router-link class="breadcrumb" to="/products">
+      Вернутся на страницу Продуктов
+      <img src="/src/assets/img/breadcrumb.png" alt="img"/>
+    </router-link>
     <div class="product">
       <img class="product-img" :src="selectedProduct.img" alt="img"/>
       <div class="product-description">
@@ -25,6 +29,9 @@ const selectedProduct = computed<ProductItem | undefined>(() => {
         <h2>Описание</h2>
         <p>
           {{ selectedProduct.description }}
+        </p>
+        <p>
+          {{ selectedProduct.alldescription }}
         </p>
         <a href="#">
           Подробнее
