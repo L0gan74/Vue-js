@@ -6,6 +6,8 @@ import Blog from "../components/pages/blog/Blog.vue";
 import Contacts from "../components/pages/contacts/Contacts.vue";
 import ProductPage from "../components/pages/products/ProductPage.vue";
 import BlogPage from "../components/pages/blog/BlogPage.vue";
+import Login from "../components/pages/login/Login.vue";
+import Register from "../components/pages/Register/Register.vue";
 
 const routes = [
     {path: '/', name: 'Home', component: Home,  exact: true},
@@ -14,6 +16,8 @@ const routes = [
     {path: '/blog', name: 'Blog', component: Blog,  exact: true},
     {path: '/blog/:id', name: 'BlogPage', component: BlogPage,  exact: true},
     {path: '/contacts', name: 'Contacts', component: Contacts,  exact: true},
+    {path: '/login', name: 'Login', component: Login,  exact: true},
+    {path: '/register', name: 'Register', component: Register,  exact: true},
 ]
 
 const router = createRouter({

@@ -22,6 +22,12 @@ const burgerMenu = ref(false)
       <li>
         <router-link to="/contacts" class="header-nav__link">Контакты</router-link>
       </li>
+      <li>
+        <router-link to="/login" class="header-nav__link">Войти</router-link>
+      </li>
+      <li>
+        <router-link to="/register" class="header-nav__link">Зарегестрироваьтся</router-link>
+      </li>
     </ul>
     <div class="header-social">
       <a href="#">
@@ -124,7 +130,7 @@ const burgerMenu = ref(false)
   }
 
   &-nav {
-    width: 360px;
+    width: 570px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -142,7 +148,7 @@ const burgerMenu = ref(false)
   &-social {
     display: flex;
     gap: 20px;
-    margin-left: 20%;
+    margin-left: 5%;
     @media(max-width: 991px) {
       display: none;
     }
@@ -155,13 +161,13 @@ const burgerMenu = ref(false)
   }
 
   &-menu {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: 10;
-    display: flex;
     justify-content: center;
     align-items: center;
     background: #000000e3;

@@ -29,3 +29,8 @@ export interface ProductItemStore {
     blogs: BlogsItem[]
 }
 
+export interface FormUsers{
+    fullName: string,
+    email: string,
+    password: string
+}
