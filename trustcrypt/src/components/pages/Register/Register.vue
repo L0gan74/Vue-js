@@ -2,6 +2,9 @@
 import {onMounted, ref} from "vue";
 import {FormUsers} from "../../../interface/Product.js";
 import axios from "axios";
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 
 const loginForm = ref<FormUsers>({
   fullName: "",
@@ -10,10 +13,11 @@ const loginForm = ref<FormUsers>({
 })
 const submitForm = () => {
 
-  axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/register`, loginForm)
+  axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/register`, loginForm.value)
 
       .then(response => {
         console.log(response.data)
+        router.push('/login')
       })
 
       .catch(err => {

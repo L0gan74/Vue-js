@@ -16,17 +16,18 @@ body {
   background-color: black;
 }
 
-.container {
-  width: 1300px;
-  margin: 0 auto;
+.wrapper {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: 1300px;
+  margin: 0 auto;
   @media(max-width: 1320px) {
     width: 100%;
     padding: 0 14px;
   }
 }
+
 
 ul, li {
   list-style-type: none;

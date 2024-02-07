@@ -3,24 +3,31 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {FormUsers} from "../../../interface/Product";
+import {useRouter} from "vue-router";
+import { Form, Field } from 'vee-validate';
+
+const router = useRouter()
 
 const loginForm = ref<FormUsers>({
   fullName: "",
   email: "",
   password: ""
 })
+
+
 const submitForm = () => {
 
-  axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/auth`, loginForm)
+  axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/auth`, loginForm.value)
 
       .then(response => {
         console.log(response.data)
+        localStorage.setItem("token", response.data.token)
+        router.push('Profile' + response.data.id)
       })
 
       .catch(err => {
         console.log(err)
       })
-
 }
 
 onMounted(() => {

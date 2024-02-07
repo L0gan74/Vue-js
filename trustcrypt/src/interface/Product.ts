@@ -26,11 +26,12 @@ export interface BlogsItem {
 
 export interface ProductItemStore {
     items: ProductItem[],
-    blogs: BlogsItem[]
+    blogs: BlogsItem[],
 }
 
 export interface FormUsers{
     fullName: string,
     email: string,
-    password: string
+    password: string,
+
 }

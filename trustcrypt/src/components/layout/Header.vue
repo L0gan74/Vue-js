@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-import {ref} from "vue";
 
-const burgerMenu = ref(false)
 
 </script>
 
@@ -87,14 +85,14 @@ const burgerMenu = ref(false)
         </svg>
       </a>
     </div>
-    <button @click="openBurgerMenu" class="header-burger" type="button">
+    <button class="header-burger" type="button">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M4.66675 21H23.3334M4.66675 7H23.3334H4.66675ZM4.66675 14H23.3334H4.66675Z" stroke="#ECF1F0"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
     <div class="header-menu">
-      <button type="button" @click="openBurgerMenu">X</button>
+      <button type="button">X</button>
       <ul>
         <li>
           <router-link to="/" class="header-nav__link" href="#">Главная</router-link>

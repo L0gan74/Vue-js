@@ -16,18 +16,20 @@ onMounted(async () => {
   await store.fetchProducts()
 })
 
-// const items = ref([])
 
-// const axiosItems = async () => {
-//   try {
-//     const {data} = await axios.get("https://0f63305226082b32.mokky.dev/products")
-//     items.value = data
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
-//
-// onMounted(axiosItems)
+
+/* const items = ref([])
+
+const axiosItems = async () => {
+  try {
+    const {data} = await axios.get("https://0f63305226082b32.mokky.dev/products")
+    items.value = data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+ onMounted(axiosItems)*/
 
 
 </script>
