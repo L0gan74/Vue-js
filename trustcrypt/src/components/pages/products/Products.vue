@@ -4,33 +4,39 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router";
 import {productsStore} from "../../../stores/store.ts";
+import {watch} from "vue/dist/vue";
 
 const store = productsStore()
 
 const router = useRouter()
-const goToProductId = (id) => {
-  router.push(({name: "ProductPage", params: {id}}))
+const goToProductId = (id: number) => {
+  this.$router.push(`/products/${id}`)
+  // router.push(({name: "ProductPage", params: {id}}))
 }
 
 onMounted(async () => {
   await store.fetchProducts()
 })
 
+const categories = [
+  {id: 1, name: 'Все продукты', categories: ""},
+  {id: 2, name: 'Категория 1', categories: "cat1"},
+  {id: 3, name: 'Категория 2', categories: "cat2"},
+  {id: 4, name: 'Категория 3', categories: "cat3"},
+]
 
 
-/* const items = ref([])
-
-const axiosItems = async () => {
+const items = ref([])
+const axiosItems = async (categoryId: number) => {
   try {
-    const {data} = await axios.get("https://0f63305226082b32.mokky.dev/products")
+    const {data} = await axios.get(`https://0f63305226082b32.mokky.dev/products/?categories=${categoryId}`)
     items.value = data
   } catch (err) {
     console.log(err)
   }
 }
 
- onMounted(axiosItems)*/
-
+onMounted(axiosItems)
 
 </script>
 
@@ -43,30 +49,22 @@ const axiosItems = async () => {
       Мы придерживаемся в своей работе простого принципа: детектировать и блокировать любую вредоносную атаку.
     </div>
     <div class="main-categories">
-      <button class="_active" type="button">
-        Все продукты
-      </button>
-      <button type="button">
-        1 категория
-      </button>
-      <button type="button">
-        2 категория
-      </button>
-      <button type="button">
-        3 категория
+      <button type="button" v-for="category in categories" :key="category.id" @click="axiosItems(category.categories)">
+        {{ category.name }}
       </button>
     </div>
     <div class="main-wrapper">
       <div class="main-wrapper__item"
-           v-for="item in store.items" :key="item.id"
-           @click="goToProductId(item.id)">
-        <div class="main-wrapper__item-image">
-          <img :src="item.img" alt="img"/>
-        </div>
-        <h4>{{ item.name }}</h4>
-        <p>
-          {{ item.description }}
-        </p>
+           v-for="item in items" :key="item.id">
+        <RouterLink :to="`/products/${item.id}`">
+          <div class="main-wrapper__item-image">
+            <img :src="item.img" alt="img"/>
+          </div>
+          <h4>{{ item.name }}</h4>
+          <p>
+            {{ item.description }}
+          </p>
+        </RouterLink>
       </div>
     </div>
   </main>

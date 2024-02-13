@@ -42,7 +42,7 @@ onMounted(() => {
     <input v-model="loginForm.fullName" type="text" placeholder="Введите Имя">
     <input v-model="loginForm.email" type="email" placeholder="Введите почту">
     <input v-model="loginForm.password" type="text" placeholder="Введите пароль">
-    <button type="submit" class="trustcrypt-button__green">Войти</button>
+    <button type="button" class="trustcrypt-button__green">Войти</button>
     <router-link to="/register">
       У вас нету аккаунта?
     </router-link>
