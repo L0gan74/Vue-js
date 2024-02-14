@@ -15,7 +15,7 @@ function menuBurger() {
 
 <template>
   <header class="header">
-    <img class="header-logo" src="/src/assets/img/Logo.svg" alt="logo"/>
+    <img class="header-logo" src="/src/assets/img/logo.svg" alt="logo"/>
     <ul class="header-nav">
       <li>
         <router-link to="/" class="header-nav__link" href="#">Главная</router-link>
