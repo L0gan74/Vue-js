@@ -23,7 +23,6 @@ const linkToNextBlogId = (id) => {
 }
 
 
-
 </script>
 
 <template>
@@ -78,22 +77,22 @@ const linkToNextBlogId = (id) => {
         <h2>
           Популярные статьи
         </h2>
-<!--        <div class="blog-aside__categories">-->
-<!--          <button class="_active" type="button">-->
-<!--            За день-->
-<!--          </button>-->
-<!--          <button type="button">-->
-<!--            За неделю-->
-<!--          </button>-->
-<!--          <button type="button">-->
-<!--            За месяц-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="blog-aside__categories">-->
+        <!--          <button class="_active" type="button">-->
+        <!--            За день-->
+        <!--          </button>-->
+        <!--          <button type="button">-->
+        <!--            За неделю-->
+        <!--          </button>-->
+        <!--          <button type="button">-->
+        <!--            За месяц-->
+        <!--          </button>-->
+        <!--        </div>-->
         <div class="blog-aside__item" v-for="blog in store.blogs" :key="blog.id">
           <div class="blog-aside__item-left">
             <img class="blog-aside__item-img" :src="blog.img" alt="img"/>
             <div class="blog-aside__item-categories">
-
+              {{blog.categories}}
             </div>
             <div class="blog-aside__item-review">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -243,6 +242,10 @@ const linkToNextBlogId = (id) => {
       grid-template-columns: 40% 60%;
       grid-gap: 34px;
 
+      @media(max-width: 767px) {
+        display: block;
+      }
+
       &-left {
         position: relative;
 
@@ -252,6 +255,10 @@ const linkToNextBlogId = (id) => {
           height: 100%;
           object-fit: cover;
           border-radius: 8px;
+          @media(max-width: 767px) {
+            width: 70%;
+            margin: 0 auto 15px;
+          }
         }
       }
 

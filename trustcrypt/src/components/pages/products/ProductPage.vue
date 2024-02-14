@@ -1,18 +1,33 @@
 <script setup lang="ts">
 import {productsStore} from "../../../stores/store.ts";
 import {useRoute} from "vue-router";
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
 import  {AllProductItem} from "../../../interface/Product";
 import SwiperProduct from "./SwiperProduct.vue";
+import axios from "axios";
 
 
 const store = productsStore()
 const route = useRoute()
 
-const selectedProduct = computed<AllProductItem>(() => {
+const item = computed<AllProductItem>(() => {
   return store.items.find((item) => item.id === Number(route.params.id))
 })
 
+
+//const item = ref(null)
+//
+//const getProduct = async () => {
+//  try {
+//    const {data} = await axios.get(`https://0f63305226082b32.mokky.dev/products/${route.params.id}`)
+//    item.value = data
+//  }
+//  catch (err){
+//    console.log(err)
+//  }
+//}
+//
+//onMounted(getProduct)
 </script>
 
 
@@ -23,15 +38,15 @@ const selectedProduct = computed<AllProductItem>(() => {
       <img src="/src/assets/img/breadcrumb.png" alt="img"/>
     </router-link>
     <div class="product">
-      <img class="product-img" :src="selectedProduct.img" alt="img"/>
+      <img class="product-img" :src="item.img" alt="img"/>
       <div class="product-description">
-        <h1>{{ selectedProduct.name }}</h1>
+        <h1>{{ item.name }}</h1>
         <h2>Описание</h2>
         <p>
-          {{ selectedProduct.description }}
+          {{ item.description }}
         </p>
         <p>
-          {{ selectedProduct.alldescription }}
+          {{ item.alldescription }}
         </p>
         <a href="#">
           Подробнее

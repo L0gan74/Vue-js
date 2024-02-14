@@ -1,5 +1,14 @@
-<script setup lang="ts">
+<script setup>
 
+import {ref} from "vue";
+
+let burger = ref(false)
+const burgerMenu = document.querySelector(".header-menu")
+
+function menuBurger() {
+   document.body.classList.add('no-scroll')
+  burger.value = !burger.value
+}
 
 
 </script>
@@ -85,14 +94,14 @@
         </svg>
       </a>
     </div>
-    <button class="header-burger" type="button">
+    <button @click="menuBurger" class="header-burger" type="button">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M4.66675 21H23.3334M4.66675 7H23.3334H4.66675ZM4.66675 14H23.3334H4.66675Z" stroke="#ECF1F0"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
     <div class="header-menu">
-      <button type="button">X</button>
+      <button @click="menuBurger" type="button">X</button>
       <ul>
         <li>
           <router-link to="/" class="header-nav__link" href="#">Главная</router-link>
@@ -170,8 +179,22 @@
     align-items: center;
     background: #000000e3;
 
+    &.open {
+      display: flex;
+    }
+
     li {
       padding-bottom: 15px;
+    }
+    button{
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      border: 1px solid white;
+      width: 30px;
+      height: 30px;
+      color: white;
+      font-weight: bold;
     }
   }
 }

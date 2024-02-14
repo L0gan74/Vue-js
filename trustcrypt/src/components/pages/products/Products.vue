@@ -4,19 +4,22 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router";
 import {productsStore} from "../../../stores/store.ts";
-import {watch} from "vue/dist/vue";
 
 const store = productsStore()
 
 const router = useRouter()
+
+//pinia
+
+
 const goToProductId = (id: number) => {
-  this.$router.push(`/products/${id}`)
-  // router.push(({name: "ProductPage", params: {id}}))
+  router.push(({name: "ProductPage", params: {id}}))
 }
 
 onMounted(async () => {
   await store.fetchProducts()
 })
+
 
 const categories = [
   {id: 1, name: 'Все продукты', categories: ""},
@@ -26,6 +29,8 @@ const categories = [
 ]
 
 
+/*
+Фильтрация,ывод товаров через axios
 const items = ref([])
 const axiosItems = async (categoryId: number) => {
   try {
@@ -38,6 +43,7 @@ const axiosItems = async (categoryId: number) => {
 
 onMounted(axiosItems)
 
+ */
 </script>
 
 <template>
@@ -55,16 +61,14 @@ onMounted(axiosItems)
     </div>
     <div class="main-wrapper">
       <div class="main-wrapper__item"
-           v-for="item in items" :key="item.id">
-        <RouterLink :to="`/products/${item.id}`">
-          <div class="main-wrapper__item-image">
-            <img :src="item.img" alt="img"/>
-          </div>
-          <h4>{{ item.name }}</h4>
-          <p>
-            {{ item.description }}
-          </p>
-        </RouterLink>
+           v-for="item in store.items" :key="item.id" @click="goToProductId(item.id)">
+        <div class="main-wrapper__item-image">
+          <img :src="item.img" alt="img"/>
+        </div>
+        <h4>{{ item.name }}</h4>
+        <p>
+          {{ item.description }}
+        </p>
       </div>
     </div>
   </main>
