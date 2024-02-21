@@ -1,41 +1,28 @@
 <script setup lang="ts">
 
 import {onMounted, ref} from "vue";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {useRouter} from "vue-router";
-import {productsStore} from "../../../stores/store.ts";
-
-const store = productsStore()
+import {ProductItem} from "../../../interface/Product";
 
 const router = useRouter()
 
-//pinia
-
-
-const goToProductId = (id: number) => {
-  router.push(({name: "ProductPage", params: {id}}))
-}
-
-onMounted(async () => {
-  await store.fetchProducts()
-})
-
-
 const categories = [
-  {id: 1, name: 'Все продукты', categories: ""},
-  {id: 2, name: 'Категория 1', categories: "cat1"},
-  {id: 3, name: 'Категория 2', categories: "cat2"},
-  {id: 4, name: 'Категория 3', categories: "cat3"},
+  {id: 1, name: 'Все продукты', categories: "/"},
+  {id: 2, name: 'Категория 1', categories: "/?categories=cat1"},
+  {id: 3, name: 'Категория 2', categories: "/?categories=cat2"},
+  {id: 4, name: 'Категория 3', categories: "/?categories=cat3"},
 ]
 
+const items = ref<ProductItem[]>([])
+const isLoading = ref(false)
 
-/*
-Фильтрация,ывод товаров через axios
-const items = ref([])
-const axiosItems = async (categoryId: number) => {
+const axiosItems = async (categoryId = '') => {
   try {
-    const {data} = await axios.get(`https://0f63305226082b32.mokky.dev/products/?categories=${categoryId}`)
+    isLoading.value = true
+    const {data}: AxiosResponse<ProductItem[]> = await axios.get(`https://0f63305226082b32.mokky.dev/products${categoryId}`)
     items.value = data
+    isLoading.value = false
   } catch (err) {
     console.log(err)
   }
@@ -43,7 +30,6 @@ const axiosItems = async (categoryId: number) => {
 
 onMounted(axiosItems)
 
- */
 </script>
 
 <template>
@@ -60,16 +46,18 @@ onMounted(axiosItems)
       </button>
     </div>
     <div class="main-wrapper">
-      <div class="main-wrapper__item"
-           v-for="item in store.items" :key="item.id" @click="goToProductId(item.id)">
-        <div class="main-wrapper__item-image">
-          <img :src="item.img" alt="img"/>
-        </div>
-        <h4>{{ item.name }}</h4>
-        <p>
-          {{ item.description }}
-        </p>
+      <div v-if="isLoading">
+        <h1>Загрузка данных</h1>
       </div>
+      <router-link v-else v-for="item in items" :key="item.id" :to="`/products/${item.id}`">
+        <div class="main-wrapper__item">
+          <div class="main-wrapper__item-image">
+            <img :src="item.img" alt="img"/>
+          </div>
+          <h4>{{ item.name }}</h4>
+          <p>{{ item.description }}</p>
+        </div>
+      </router-link>
     </div>
   </main>
 </template>

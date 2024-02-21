@@ -1,33 +1,30 @@
 <script setup lang="ts">
-import {productsStore} from "../../../stores/store.ts";
+
 import {useRoute} from "vue-router";
-import {computed, onMounted, ref} from "vue";
-import  {AllProductItem} from "../../../interface/Product";
+import {onBeforeMount, ref,} from "vue";
 import SwiperProduct from "./SwiperProduct.vue";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import {AllProductItem} from "../../../interface/Product";
 
 
-const store = productsStore()
 const route = useRoute()
+const item = ref<AllProductItem | null>(null)
+const isLoading = ref(false)
 
-const item = computed<AllProductItem>(() => {
-  return store.items.find((item) => item.id === Number(route.params.id))
-})
+const getProduct = async () => {
+  try {
+    isLoading.value = true
+    const {data}: AxiosResponse<AllProductItem> = await axios.get(`https://0f63305226082b32.mokky.dev/products/${route.params.id}`)
+    item.value = data
+    isLoading.value = false
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+onBeforeMount(getProduct)
 
 
-//const item = ref(null)
-//
-//const getProduct = async () => {
-//  try {
-//    const {data} = await axios.get(`https://0f63305226082b32.mokky.dev/products/${route.params.id}`)
-//    item.value = data
-//  }
-//  catch (err){
-//    console.log(err)
-//  }
-//}
-//
-//onMounted(getProduct)
 </script>
 
 
@@ -37,7 +34,10 @@ const item = computed<AllProductItem>(() => {
       Вернутся на страницу Продуктов
       <img src="/src/assets/img/breadcrumb.png" alt="img"/>
     </router-link>
-    <div class="product">
+    <div v-if="isLoading">
+      <h1>Загрузка данных</h1>
+    </div>
+    <div v-else class="product">
       <img class="product-img" :src="item.img" alt="img"/>
       <div class="product-description">
         <h1>{{ item.name }}</h1>
@@ -62,7 +62,7 @@ const item = computed<AllProductItem>(() => {
   display: grid;
   grid-template-columns: 40% 1fr;
   grid-gap: 60px;
-  @media(max-width: 991px){
+  @media(max-width: 991px) {
     display: block;
   }
 
@@ -71,7 +71,7 @@ const item = computed<AllProductItem>(() => {
     width: 100%;
     object-fit: cover;
     border-radius: 10px;
-    @media(max-width: 991px){
+    @media(max-width: 991px) {
       margin-bottom: 32px;
     }
   }
@@ -82,10 +82,10 @@ const item = computed<AllProductItem>(() => {
       font-size: 34px;
       font-weight: 700;
       padding-bottom: 32px;
-      @media(max-width: 1220px){
+      @media(max-width: 1220px) {
         font-size: 26px;
       }
-      @media(max-width: 991px){
+      @media(max-width: 991px) {
         font-size: 21px;
         padding-bottom: 16px;
       }
@@ -97,22 +97,24 @@ const item = computed<AllProductItem>(() => {
       font-style: normal;
       font-weight: 700;
       padding-bottom: 16px;
-      @media(max-width: 1220px){
+      @media(max-width: 1220px) {
         font-size: 20px;
       }
-      @media(max-width: 991px){
+      @media(max-width: 991px) {
         font-size: 17px;
       }
     }
-    p{
+
+    p {
       color: #D4D4D4;
       font-size: 17px;
       padding-bottom: 16px;
-      @media(max-width: 991px){
+      @media(max-width: 991px) {
         font-size: 14px;
       }
     }
-    a{
+
+    a {
       color: #D4D4D4;
       font-size: 17px;
       text-decoration-line: underline;
