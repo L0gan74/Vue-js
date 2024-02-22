@@ -45,8 +45,7 @@ onMounted(axiosItems)
         <h1>Загрузка данных</h1>
       </div>
       <router-link v-else v-for="blog in blogs" :key="blog.id" :to="`/blog/${blog.id}`">
-        <div class="main-wrapper__item"
-             v-for="blog in blogs" :key="blog.id">
+        <div class="main-wrapper__item">
           <div class="main-wrapper__item-image">
           <span class="main-wrapper__item-categories">
             {{ blog.categories }}
