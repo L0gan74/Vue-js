@@ -1,13 +1,22 @@
 <script setup>
 
 import {ref} from "vue";
+import axios from "axios";
 
-let burger = ref(false)
-const burgerMenu = document.querySelector(".header-menu")
+const burger = ref(false)
 
-function menuBurger() {
-   document.body.classList.add('no-scroll')
-  burger.value = !burger.value
+const users = async () => {
+  try {
+    const response = await axios.get(`https://0f63305226082b32.mokky.dev/users`,{
+      headers:{
+        Authorization: "Bearer" + localStorage.getItem('token')
+      }
+    })
+    console.log(response)
+
+  } catch (err) {
+
+  }
 }
 
 
@@ -37,6 +46,9 @@ function menuBurger() {
       </li>
     </ul>
     <div class="header-social">
+      <h4>
+        {{}}
+      </h4>
       <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <g clip-path="url(#clip0_3307_252)">
@@ -94,14 +106,14 @@ function menuBurger() {
         </svg>
       </a>
     </div>
-    <button @click="menuBurger" class="header-burger" type="button">
+    <button @click="burger = !burger" class="header-burger" type="button">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M4.66675 21H23.3334M4.66675 7H23.3334H4.66675ZM4.66675 14H23.3334H4.66675Z" stroke="#ECF1F0"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <div class="header-menu">
-      <button @click="menuBurger" type="button">X</button>
+    <div v-if="burger" class="header-menu">
+      <button type="button">X</button>
       <ul>
         <li>
           <router-link to="/" class="header-nav__link" href="#">Главная</router-link>
@@ -114,6 +126,12 @@ function menuBurger() {
         </li>
         <li>
           <router-link to="/contacts" class="header-nav__link">Контакты</router-link>
+        </li>
+        <li>
+          <router-link to="/login" class="header-nav__link">Войти</router-link>
+        </li>
+        <li>
+          <router-link to="/register" class="header-nav__link">Зарегестрироваьтся</router-link>
         </li>
       </ul>
     </div>
@@ -162,39 +180,27 @@ function menuBurger() {
   }
 
   &-burger {
+    z-index: 3;
     @media(min-width: 992px) {
       display: none;
     }
   }
 
   &-menu {
-    display: none;
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 10;
+    z-index: 2;
     justify-content: center;
     align-items: center;
     background: #000000e3;
 
-    &.open {
-      display: flex;
-    }
 
     li {
       padding-bottom: 15px;
-    }
-    button{
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      border: 1px solid white;
-      width: 30px;
-      height: 30px;
-      color: white;
-      font-weight: bold;
     }
   }
 }

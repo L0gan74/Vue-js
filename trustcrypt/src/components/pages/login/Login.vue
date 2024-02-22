@@ -20,9 +20,8 @@ const submitForm = () => {
   axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/auth`, loginForm.value)
 
       .then(response => {
-        console.log(response.data)
         localStorage.setItem("token", response.data.token)
-        router.push('Profile' + response.data.id)
+        console.log(response.data)
       })
 
       .catch(err => {
@@ -57,6 +56,9 @@ onMounted(() => {
   border-radius: 8px;
   border: 1px solid white;
   padding: 15px;
+  @media(max-width: 767px){
+    width: 100%;
+  }
 
   h1 {
     text-align: center;
