@@ -12,18 +12,13 @@ const loginForm = ref<FormUsers>({
   password: ""
 })
 const submitForm = () => {
-
   axios.post<FormUsers>(`https://0f63305226082b32.mokky.dev/register`, loginForm.value)
-
       .then(response => {
-        console.log(response.data)
         router.push('/login')
       })
-
       .catch(err => {
         console.log(err)
       })
-
 }
 
 onMounted(() => {

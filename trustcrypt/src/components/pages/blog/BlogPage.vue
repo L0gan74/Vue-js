@@ -30,7 +30,6 @@ const getBlogsLimit = async () => {
     isLoading.value = true
     const {data}: AxiosResponse<BlogsItem[]> = await axios.get(`https://0f63305226082b32.mokky.dev/blogs?limit=3`)
     blogs.value = data.items
-    console.log(data.items)
     isLoading.value = false
   } catch (err) {
     console.log(err)

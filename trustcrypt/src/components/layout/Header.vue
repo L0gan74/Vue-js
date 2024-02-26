@@ -12,8 +12,6 @@ const users = async () => {
         Authorization: "Bearer" + localStorage.getItem('token')
       }
     })
-    console.log(response)
-
   } catch (err) {
 
   }

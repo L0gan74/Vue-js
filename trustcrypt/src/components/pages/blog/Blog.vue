@@ -5,9 +5,9 @@ import axios, {AxiosResponse} from "axios";
 import {BlogsItem} from "../../../interface/Product";
 
 const categories = [
-  {id: 1, name: 'Все продукты', categories: "/"},
-  {id: 2, name: 'Советы', categories: "/?categories=adviсe"},
-  {id: 3, name: 'Разработка', categories: "/?categories=development"},
+  {id: 1, name: 'Все продукты', categories: "/", active:false},
+  {id: 2, name: 'Советы', categories: "/?categories=adviсe", active:false},
+  {id: 3, name: 'Разработка', categories: "/?categories=development", active:false},
 ]
 
 const blogs = ref<BlogsItem[]>([])
